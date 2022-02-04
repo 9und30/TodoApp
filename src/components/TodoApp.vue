@@ -44,6 +44,9 @@ export default {
       ]
     }
   },
+  created() {
+    this.loadTasks()
+  },
   computed: {
     getTaskLength() {
       return this.task.length
@@ -64,15 +67,18 @@ export default {
           this.tasks[this.editedTask].name = this.task
           this.editedTask = null
         }
+        localStorage.setItem('tasks', JSON.stringify(this.tasks))
         this.task = ''
       }
     },
     removeTask(index) {
       this.tasks.splice(index, 1)
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
     },
     editTask(index) {
       this.task = this.tasks[index].name
       this.editedTask = index
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
     },
     toggleStatus(index) {
       if (this.tasks[index].status === this.statuses[0]) {
@@ -80,6 +86,13 @@ export default {
       }
       else {
         this.tasks[index].status = this.statuses[0]
+      }
+      localStorage.setItem('tasks', JSON.stringify(this.tasks))
+    },
+    loadTasks() {
+      let loadedTasks = JSON.parse(localStorage.getItem('tasks'))
+      if (loadedTasks) {
+        this.tasks = loadedTasks
       }
     }
   }
