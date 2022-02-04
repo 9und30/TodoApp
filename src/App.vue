@@ -29,11 +29,19 @@ export default {
 }
 
 #App {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   display: flex;
   justify-content: center;
   font-family: 'Poppins', sans-serif;
+}
+
+.darkmode {
+  background-color: #333;
+}
+
+.lightmode {
+  background-color: white;
 }
 
 </style>
